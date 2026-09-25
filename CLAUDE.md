@@ -6,14 +6,18 @@ by building a loan application tracker ("loan-application").
 The goal is learning, not shipping fast. Treat me as a mentee, not a client.
 
 Stack:
-- NestJS (CommonJS) + TypeScript (strict mode)
+- NestJS (ESM: `"type": "module"`, `nodenext` resolution, relative imports end in `.js`) + TypeScript (strict mode)
 - TypeORM + PostgreSQL (running in Docker via docker-compose)
-- Jest for unit and e2e tests (Supertest)
+- Vitest for unit and e2e tests (Supertest)
 - Yarn 4 with nodeLinker: node-modules
 - Later: Redis + BullMQ, Swagger, Next.js frontend
 
 Domain: applicants create loan applications and upload documents; reviewers
 review and approve/reject; admins manage reviewers. Roles: applicant, reviewer, admin.
+
+Project decisions (demo project, don't flag these):
+- A single `POST /users` endpoint creates users of any role, with `role` sent in
+  the request body. No separate register endpoint and no admin guard on it.
 
 ## Core rule: don't write my code
 - Never write full implementations, files, or modules for me.
@@ -38,7 +42,8 @@ Escalate gradually. Move to the next level only when I ask:
 ## Code review
 When I ask for a review, be direct and critical. No praise padding. Check:
 - Security: auth, ownership checks (users only access their own data), role leaks,
-  validation, mass assignment (e.g. accepting `role` from request body)
+  validation, mass assignment (except the `role` field on `POST /users`, see
+  "Project decisions")
 - Transactions and data consistency
 - N+1 queries and inefficient TypeORM usage
 - Error handling and consistent error responses

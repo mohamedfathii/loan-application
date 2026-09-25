@@ -3,17 +3,24 @@
 ### Hello
 GET {{baseUrl}}/
 
-### Create loan
-POST {{baseUrl}}/loans
+### Create user
+# @name createUser
+POST {{baseUrl}}/users/create
 Content-Type: application/json
 
 {
-  "amount": 5000,
-  "termMonths": 12
+  "name": "Mohamed Fathy",
+  "email": "mohamed.fathy@example.com",
+  "password": "23213213213",
+  "phoneNumber": "+971501234567",
+  "role": "admin"
 }
 
-### List loans
-GET {{baseUrl}}
+### Get the user created above
+GET {{baseUrl}}/users/18771e51-1b42-45c2-9d98-03c3a5353c45
 
-### Get one loan
-GET {{baseUrl}}/loans/1
+### list users
+GET {{baseUrl}}/users/list
+Content-Type: application/json
+
+
