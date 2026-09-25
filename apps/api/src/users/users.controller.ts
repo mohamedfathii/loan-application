@@ -27,7 +27,6 @@ export class UsersController {
 
   @Get(':id')
   async getUserById(
-    // Rejects non-UUIDs with a 400 before they reach Postgres.
     @Param('id', ParseUUIDPipe) id: string,
   ): Promise<User> {
     const user = await this.usersService.findById(id);

@@ -7,7 +7,6 @@ import { UsersModule } from './users/users.module.js';
 
 @Module({
   imports: [
-    // Loads .env into process.env and exposes it through ConfigService.
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
@@ -18,11 +17,8 @@ import { UsersModule } from './users/users.module.js';
         username: config.getOrThrow<string>('DB_USER'),
         password: config.getOrThrow<string>('DB_PASSWORD'),
         database: config.getOrThrow<string>('DB_NAME'),
-        // Must match src/database/data-source.ts.
         uuidExtension: 'pgcrypto',
-        // Picks up entities registered via TypeOrmModule.forFeature().
         autoLoadEntities: true,
-        // Schema changes go through migrations, never auto-sync.
         synchronize: false,
       }),
     }),

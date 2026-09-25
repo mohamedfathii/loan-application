@@ -1,3 +1,7 @@
+# Fixed project name so the container and data volume keep their names
+# no matter which folder compose is run from.
+name: loan-application
+
 services:
   db:
     image: postgres:17

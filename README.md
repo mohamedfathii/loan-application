@@ -1,26 +1,22 @@
 # loan-application
 
-NestJS API for loan applications.
+Loan application tracker. Monorepo managed with Yarn 4 workspaces.
 
-## Setup
+| Folder | What |
+|---|---|
+| `apps/api` | NestJS API + PostgreSQL (see [apps/api/README.md](apps/api/README.md)) |
+| `apps/web` | Next.js frontend |
 
-```sh
-yarn install
-```
-
-## Run
-
-```sh
-yarn start:dev      # watch mode on http://localhost:3000 (override with PORT)
-yarn build && yarn start:prod
-```
-
-## Test
+## Quick start
 
 ```sh
-yarn test           # unit tests
-yarn test:e2e       # end-to-end tests
-yarn test:cov       # coverage
+yarn install                       # installs all apps
+cp apps/api/.env.example apps/api/.env
+yarn db:up                         # start Postgres (Docker)
+yarn api migration:run             # create tables
+yarn api start:dev                 # API on http://localhost:3000
+yarn web dev                       # web on http://localhost:3001
 ```
 
-Manual API requests live in `requests.http` (VS Code REST Client extension).
+Run any app's script from the root with `yarn api <script>` / `yarn web <script>`,
+or `cd` into the app folder and use `yarn <script>`.
